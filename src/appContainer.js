@@ -1,12 +1,9 @@
 import React from 'react';
 import PianoMoodContainer from './pianoKit';
 import informationInstrument from './utils';
-/* import useSound from 'use-sound'; */
-/* import mySound from '../assets/sounds/yourSound.mp3'; */
 
 let elementClicked = null;
-/* let sound = null;
-const [play] = null; */
+let sound = null;
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -18,6 +15,7 @@ class AppContainer extends React.Component {
 
     this.handleMoodClick = this.handleMoodClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.playSound = this.playSound.bind(this);
   }
 
   handleMoodClick() {
@@ -39,24 +37,21 @@ class AppContainer extends React.Component {
     this.setState({
       buttonClicked: elementClicked,
     });
+    this.playSound(this.state.instrumentMood, this.state.buttonClicked);
+  }
+
+  playSound(instrumentMood, buttonClicked) {
+    if (instrumentMood) {
+      sound = new Audio(buttonClicked.soundBankUrl);
+      sound.play();
+    } else {
+      sound = new Audio(buttonClicked.soundPainoUrl);
+      sound.play();
+    }
   }
 
   render() {
     const { instrumentMood, buttonClicked } = this.state;
-
-    /*  let nameSound = '';
-    let soundPlay = ''; */
-
-    /* let nameSound = buttonClicked.nameSoundBank;
-    let soundPlay = buttonClicked.soundBankUrl; */
-
-    /* if (instrumentMood) {
-      nameSound = buttonClicked.nameSoundBank;
-      soundPlay = buttonClicked.soundBankUrl;
-    } else if (!instrumentMood) {
-      nameSound = buttonClicked.nameSoundPiano;
-      soundPlay = buttonClicked.soundPainoUrl;
-    } */
 
     return (
       <div className="container-component">
