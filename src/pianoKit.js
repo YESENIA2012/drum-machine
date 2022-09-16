@@ -14,22 +14,20 @@ const PianoMoodContainer = (props) => {
           return (
             <div
               key={keyCode}
-              className={`key-${index}`}
+              className={`element-${index}`}
               onClick={handleButtonClick}
             >
               {keyTrigger}
-              <audio controls src={soundBankUrl} autoPlay></audio>
             </div>
           );
         } else {
           return (
             <div
               key={keyCode}
-              className={`key-${index}`}
+              className={`element-${index}`}
               onClick={handleButtonClick}
             >
               {keyTrigger}
-              <audio controls src={soundPainoUrl} autoPlay></audio>
             </div>
           );
         }
@@ -50,10 +48,12 @@ const PianoMoodContainer = (props) => {
 
   return (
     <div className="container-elements">
-      {title}
-      <div>{items}</div>
-      <div>{nameSound}</div>
-      <button onClick={handleMoodClick}>Click Me</button>
+      <div className="contenedor-items">{items}</div>
+      <div>
+        <div>{title}</div>
+        <div>{nameSound}</div>
+        <button onClick={handleMoodClick}>Click Me</button>
+      </div>
     </div>
   );
 };
