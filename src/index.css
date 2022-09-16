@@ -16,5 +16,34 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 755px;
   background-color: #8d8d8d;
+}
+
+.container-elements{
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  border: 3px solid orange;
+}
+
+.contenedor-items{
+  width: 300px;
+}
+
+/* .element{
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 80px;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding-top: 35px;
+  box-sizing: border-box;
+  cursor: pointer;
+} */
+
+
+audio:not([controls]){
+  display: none !important;;
 }
