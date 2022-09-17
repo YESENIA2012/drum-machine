@@ -86,13 +86,3 @@ const informationInstrument = [
 ];
 
 export default informationInstrument;
-
-/*  play(instrumentMood, buttonClicked) {
-    if (instrumentMood) {
-      sound = buttonClicked.soundBankUrl;
-      [play] = useSound(sound);
-    } else {
-      sound = buttonClicked.soundPainoUrl;
-      [play] = useSound(sound);
-    }
-  } */
