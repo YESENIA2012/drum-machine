@@ -1,58 +1,69 @@
 import informationInstrument from './utils';
-
-let title = '';
-let nameSound = '';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFreeCodeCamp } from '@fortawesome/free-brands-svg-icons';
 
 const PianoMoodContainer = (props) => {
-  const { instrumentMood, buttonClicked, handleMoodClick, handleButtonClick } =
-    props;
+  const {
+    instrumentType,
+    urlToPlay,
+    handleInstrumentTypeClick,
+    handleButtonClick,
+    volume,
+    volumeSlider,
+  } = props;
 
-  function paintMusicalKeyboard(informationInstrument, instrumentMood) {
-    const items = informationInstrument.map(
-      ({ keyCode, keyTrigger, soundBankUrl, soundPainoUrl }, index) => {
-        if (instrumentMood) {
-          return (
-            <div
-              key={keyCode}
-              className={`element-${index}`}
-              onClick={handleButtonClick}
-            >
-              {keyTrigger}
-            </div>
-          );
-        } else {
-          return (
-            <div
-              key={keyCode}
-              className={`element-${index}`}
-              onClick={handleButtonClick}
-            >
-              {keyTrigger}
-            </div>
-          );
-        }
-      }
-    );
-    return items;
+  function paintMusicalKeyboard(informationInstrument, instrumentType) {
+    const item = informationInstrument.map(({ keyCode, keyTrigger }, index) => {
+      return (
+        <div
+          key={keyCode}
+          className="element"
+          onClick={(e) => {
+            handleButtonClick(index);
+          }}
+        >
+          {keyTrigger}
+        </div>
+      );
+    });
+    return item;
   }
 
-  var items = paintMusicalKeyboard(informationInstrument, instrumentMood);
+  const item = paintMusicalKeyboard(informationInstrument, instrumentType);
 
-  if (instrumentMood) {
+  let title = '';
+  let nameSound = null;
+  if (instrumentType) {
     title = 'Heater Kit';
-    nameSound = buttonClicked.nameSoundBank;
+    nameSound = urlToPlay.nameSoundBank;
   } else {
     title = 'Smooth Piano Kit';
-    nameSound = buttonClicked.nameSoundPiano;
+    nameSound = urlToPlay.nameSoundPiano;
   }
 
   return (
     <div className="container-elements">
-      <div className="contenedor-items">{items}</div>
-      <div>
-        <div>{title}</div>
-        <div>{nameSound}</div>
-        <button onClick={handleMoodClick}>Click Me</button>
+      <div className="contenedor-items">{item}</div>
+      <div className="container-button-and-title">
+        <div className="icon-container">
+          FFC <FontAwesomeIcon icon={faFreeCodeCamp} />{' '}
+        </div>
+        <div className="mood-title">{title}</div>
+        <div className="sound-title">{nameSound}</div>
+        <div className="volume-slider">
+          <input
+            className="slider"
+            type="range"
+            step="0.01"
+            min="0"
+            max="1"
+            value={volumeSlider}
+            onChange={volume}
+          />
+        </div>
+        <button className="button" onClick={handleInstrumentTypeClick}>
+          Change Type
+        </button>
       </div>
     </div>
   );
