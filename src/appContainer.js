@@ -2,64 +2,79 @@ import React from 'react';
 import PianoMoodContainer from './pianoKit';
 import informationInstrument from './utils';
 
-let elementClicked = null;
-let sound = null;
-
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      instrumentMood: true,
-      buttonClicked: ' ',
+      instrumentType: true,
+      volumeSlider: 0.3,
+      urlToPlay: '',
     };
 
-    this.handleMoodClick = this.handleMoodClick.bind(this);
+    this.handleInstrumentTypeClick = this.handleInstrumentTypeClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.playSound = this.playSound.bind(this);
+    this.volume = this.volume.bind(this);
   }
 
-  handleMoodClick() {
+  handleInstrumentTypeClick() {
     this.setState({
-      instrumentMood: !this.state.instrumentMood,
+      instrumentType: !this.state.instrumentType,
     });
   }
 
-  handleButtonClick(e) {
-    const event = e.target.className.split('-');
-    const idClicked = Number(event[1]);
+  handleButtonClick(index) {
+    let elementClicked = null;
 
     informationInstrument.map(({ id }) => {
-      if (idClicked === id) {
+      if (index === id) {
         elementClicked = informationInstrument[id];
       }
       return elementClicked;
     });
-    this.setState({
-      buttonClicked: elementClicked,
-    });
-    this.playSound(this.state.instrumentMood, this.state.buttonClicked);
+
+    const { instrumentType, volumeSlider } = this.state;
+    this.playSound(instrumentType, elementClicked, volumeSlider);
   }
 
-  playSound(instrumentMood, buttonClicked) {
-    if (instrumentMood) {
-      sound = new Audio(buttonClicked.soundBankUrl);
+  playSound(instrumentType, elementClicked, volumeSlider) {
+    let sound = null;
+
+    if (instrumentType) {
+      sound = new Audio(elementClicked.soundBankUrl);
       sound.play();
+      sound.volume = volumeSlider;
     } else {
-      sound = new Audio(buttonClicked.soundPainoUrl);
+      sound = new Audio(elementClicked.soundPainoUrl);
       sound.play();
+      sound.volume = volumeSlider;
     }
+
+    this.setState({
+      urlToPlay: elementClicked,
+    });
+  }
+
+  volume(event) {
+    this.setState({
+      volumeSlider: Number(event.target.value),
+    });
   }
 
   render() {
-    const { instrumentMood, buttonClicked } = this.state;
+    const { instrumentType, buttonClicked, volumeSlider, urlToPlay } =
+      this.state;
 
     return (
       <div className="container-component">
         <PianoMoodContainer
           buttonClicked={buttonClicked}
-          instrumentMood={instrumentMood}
-          handleMoodClick={this.handleMoodClick}
+          instrumentType={instrumentType}
+          handleInstrumentTypeClick={this.handleInstrumentTypeClick}
           handleButtonClick={this.handleButtonClick}
+          urlToPlay={urlToPlay}
+          volume={this.volume}
+          volumeSlider={volumeSlider}
         />
       </div>
     );
