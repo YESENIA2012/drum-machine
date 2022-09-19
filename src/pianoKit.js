@@ -8,7 +8,7 @@ const PianoMoodContainer = (props) => {
     urlToPlay,
     handleInstrumentTypeClick,
     handleButtonClick,
-    volume,
+    onChangeVolume,
     soundVolume,
   } = props;
 
@@ -57,7 +57,7 @@ const PianoMoodContainer = (props) => {
             min="0"
             max="1"
             value={soundVolume}
-            onChange={volume}
+            onChange={onChangeVolume}
           />
         </div>
         <button className="button" onClick={handleInstrumentTypeClick}>

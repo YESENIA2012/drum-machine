@@ -14,7 +14,8 @@ class AppContainer extends React.Component {
     this.handleInstrumentTypeClick = this.handleInstrumentTypeClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.playSound = this.playSound.bind(this);
-    this.volume = this.volume.bind(this);
+    this.onChangeVolume = this.onChangeVolume.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleInstrumentTypeClick() {
@@ -51,9 +52,29 @@ class AppContainer extends React.Component {
     });
   }
 
-  volume(event) {
+  onChangeVolume(event) {
     this.setState({
       soundVolume: Number(event.target.value),
+    });
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress, true);
+  }
+
+  handleKeyPress(e) {
+    const { instrumentType, soundVolume } = this.state;
+
+    InstrumentsData.forEach(({ keyCode }, index) => {
+      if (e.keyCode === keyCode) {
+        const sound = new Audio(
+          instrumentType
+            ? InstrumentsData[index].soundBankUrl
+            : InstrumentsData[index].soundPainoUrl
+        );
+        sound.play();
+        sound.volume = soundVolume;
+      }
     });
   }
 
@@ -69,7 +90,7 @@ class AppContainer extends React.Component {
           handleInstrumentTypeClick={this.handleInstrumentTypeClick}
           handleButtonClick={this.handleButtonClick}
           urlToPlay={urlToPlay}
-          volume={this.volume}
+          onChangeVolume={this.onChangeVolume}
           soundVolume={soundVolume}
         />
       </div>
