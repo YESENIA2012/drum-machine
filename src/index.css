@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.container-component{
+.component-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@ code {
   background-color: #8d8d8d;
 }
 
-.container-elements{
+.elements-container{
   display: flex;
   flex-direction: row;
   width: 680px;
@@ -28,7 +28,10 @@ code {
   border: 5px solid orange;
 }
 
-.contenedor-items{
+.items-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 20px 30px 30px 30px;
   width: 400px;
   justify-content: center;
@@ -36,7 +39,6 @@ code {
 }
 
 .element{
-  float: left;
   width: 100px;
   height: 80px;
   margin: 10px 2px 2px 5px;

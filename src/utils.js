@@ -1,4 +1,4 @@
-const informationInstrument = [
+const InstrumentsData = [
   {
     id: 0,
     keyCode: 81,
@@ -85,4 +85,4 @@ const informationInstrument = [
   },
 ];
 
-export default informationInstrument;
+export default InstrumentsData;

@@ -1,13 +1,13 @@
 import React from 'react';
 import PianoMoodContainer from './pianoKit';
-import informationInstrument from './utils';
+import InstrumentsData from './utils';
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       instrumentType: true,
-      volumeSlider: 0.3,
+      soundVolume: 0.3,
       urlToPlay: '',
     };
 
@@ -26,29 +26,25 @@ class AppContainer extends React.Component {
   handleButtonClick(index) {
     let elementClicked = null;
 
-    informationInstrument.map(({ id }) => {
+    InstrumentsData.map(({ id }) => {
       if (index === id) {
-        elementClicked = informationInstrument[id];
+        elementClicked = InstrumentsData[id];
       }
       return elementClicked;
     });
 
-    const { instrumentType, volumeSlider } = this.state;
-    this.playSound(instrumentType, elementClicked, volumeSlider);
+    const { instrumentType, soundVolume } = this.state;
+    this.playSound(instrumentType, elementClicked, soundVolume);
   }
 
-  playSound(instrumentType, elementClicked, volumeSlider) {
-    let sound = null;
-
-    if (instrumentType) {
-      sound = new Audio(elementClicked.soundBankUrl);
-      sound.play();
-      sound.volume = volumeSlider;
-    } else {
-      sound = new Audio(elementClicked.soundPainoUrl);
-      sound.play();
-      sound.volume = volumeSlider;
-    }
+  playSound(instrumentType, elementClicked, soundVolume) {
+    const sound = new Audio(
+      instrumentType
+        ? elementClicked.soundBankUrl
+        : elementClicked.soundPainoUrl
+    );
+    sound.play();
+    sound.volume = soundVolume;
 
     this.setState({
       urlToPlay: elementClicked,
@@ -57,16 +53,16 @@ class AppContainer extends React.Component {
 
   volume(event) {
     this.setState({
-      volumeSlider: Number(event.target.value),
+      soundVolume: Number(event.target.value),
     });
   }
 
   render() {
-    const { instrumentType, buttonClicked, volumeSlider, urlToPlay } =
+    const { instrumentType, buttonClicked, soundVolume, urlToPlay } =
       this.state;
 
     return (
-      <div className="container-component">
+      <div className="component-container">
         <PianoMoodContainer
           buttonClicked={buttonClicked}
           instrumentType={instrumentType}
@@ -74,7 +70,7 @@ class AppContainer extends React.Component {
           handleButtonClick={this.handleButtonClick}
           urlToPlay={urlToPlay}
           volume={this.volume}
-          volumeSlider={volumeSlider}
+          soundVolume={soundVolume}
         />
       </div>
     );

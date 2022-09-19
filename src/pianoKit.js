@@ -1,4 +1,4 @@
-import informationInstrument from './utils';
+import InstrumentsData from './utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFreeCodeCamp } from '@fortawesome/free-brands-svg-icons';
 
@@ -9,11 +9,11 @@ const PianoMoodContainer = (props) => {
     handleInstrumentTypeClick,
     handleButtonClick,
     volume,
-    volumeSlider,
+    soundVolume,
   } = props;
 
-  function paintMusicalKeyboard(informationInstrument, instrumentType) {
-    const item = informationInstrument.map(({ keyCode, keyTrigger }, index) => {
+  function paintMusicalKeyboard(InstrumentsData) {
+    return InstrumentsData.map(({ keyCode, keyTrigger }, index) => {
       return (
         <div
           key={keyCode}
@@ -26,10 +26,9 @@ const PianoMoodContainer = (props) => {
         </div>
       );
     });
-    return item;
   }
 
-  const item = paintMusicalKeyboard(informationInstrument, instrumentType);
+  const item = paintMusicalKeyboard(InstrumentsData);
 
   let title = '';
   let nameSound = null;
@@ -42,8 +41,8 @@ const PianoMoodContainer = (props) => {
   }
 
   return (
-    <div className="container-elements">
-      <div className="contenedor-items">{item}</div>
+    <div className="elements-container">
+      <div className="items-container">{item}</div>
       <div className="container-button-and-title">
         <div className="icon-container">
           FFC <FontAwesomeIcon icon={faFreeCodeCamp} />{' '}
@@ -57,7 +56,7 @@ const PianoMoodContainer = (props) => {
             step="0.01"
             min="0"
             max="1"
-            value={volumeSlider}
+            value={soundVolume}
             onChange={volume}
           />
         </div>
