@@ -12,7 +12,7 @@ const PianoMoodContainer = (props) => {
     soundVolume,
   } = props;
 
-  function paintMusicalKeyboard(InstrumentsData) {
+  function drawMusicalBoard() {
     return InstrumentsData.map(({ keyCode, keyTrigger }, index) => {
       return (
         <div
@@ -28,7 +28,7 @@ const PianoMoodContainer = (props) => {
     });
   }
 
-  const item = paintMusicalKeyboard(InstrumentsData);
+  const item = drawMusicalBoard();
 
   let title = '';
   let nameSound = null;
