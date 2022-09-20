@@ -1,6 +1,6 @@
 import React from 'react';
 import PianoMoodContainer from './pianoKit';
-import InstrumentsData from './utils';
+import instrumentsData from './utils';
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -27,9 +27,9 @@ class AppContainer extends React.Component {
   handleButtonClick(index) {
     let elementClicked = null;
 
-    InstrumentsData.map(({ id }) => {
+    instrumentsData.map(({ id }) => {
       if (index === id) {
-        elementClicked = InstrumentsData[id];
+        elementClicked = instrumentsData[id];
       }
       return elementClicked;
     });
@@ -65,16 +65,23 @@ class AppContainer extends React.Component {
   handleKeyPress(e) {
     const { instrumentType, soundVolume } = this.state;
 
-    InstrumentsData.forEach(({ keyCode }, index) => {
-      if (e.keyCode === keyCode) {
-        const sound = new Audio(
-          instrumentType
-            ? InstrumentsData[index].soundBankUrl
-            : InstrumentsData[index].soundPainoUrl
-        );
-        sound.play();
-        sound.volume = soundVolume;
+    let clickedButton = null;
+
+    for (let index = 0; index < instrumentsData.length; index++) {
+      if (e.keyCode === instrumentsData[index].keyCode) {
+        clickedButton = instrumentsData[index];
+        break;
       }
+    }
+
+    const sound = new Audio(
+      instrumentType ? clickedButton.soundBankUrl : clickedButton.soundPainoUrl
+    );
+    sound.play();
+    sound.volume = soundVolume;
+
+    this.setState({
+      urlToPlay: clickedButton,
     });
   }
 
