@@ -1,4 +1,4 @@
-import InstrumentsData from './utils';
+import instrumentsData from './utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFreeCodeCamp } from '@fortawesome/free-brands-svg-icons';
 
@@ -13,7 +13,7 @@ const PianoMoodContainer = (props) => {
   } = props;
 
   function drawMusicalBoard() {
-    return InstrumentsData.map(({ keyCode, keyTrigger }, index) => {
+    return instrumentsData.map(({ keyCode, keyTrigger }, index) => {
       return (
         <div
           key={keyCode}
