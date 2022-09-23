@@ -85,10 +85,18 @@ code {
   font-weight: 800;
 }
 
-.button{
+.buttonOnOrOff{
+  margin-bottom: 15px;
+}
+
+.button, .buttonOnOrOff{
   height: 30px;
   background-color: gray;
   border: 2px solid orange;
+}
+
+.buttonOnOrOff:hover{
+  cursor: pointer;
 }
 
 .button:hover{

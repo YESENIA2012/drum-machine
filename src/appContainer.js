@@ -9,6 +9,7 @@ class AppContainer extends React.Component {
       instrumentType: true,
       soundVolume: 0.3,
       urlToPlay: '',
+      buttonOnOrOff: true,
     };
 
     this.handleInstrumentTypeClick = this.handleInstrumentTypeClick.bind(this);
@@ -16,6 +17,13 @@ class AppContainer extends React.Component {
     this.playSound = this.playSound.bind(this);
     this.onChangeVolume = this.onChangeVolume.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.powerButton = this.powerButton.bind(this);
+  }
+
+  powerButton() {
+    this.setState({
+      buttonOnOrOff: !this.state.buttonOnOrOff,
+    });
   }
 
   handleInstrumentTypeClick() {
@@ -44,8 +52,11 @@ class AppContainer extends React.Component {
         ? elementClicked.soundBankUrl
         : elementClicked.soundPainoUrl
     );
-    sound.play();
-    sound.volume = soundVolume;
+
+    if (this.state.buttonOnOrOff) {
+      sound.play();
+      sound.volume = soundVolume;
+    }
 
     this.setState({
       urlToPlay: elementClicked,
@@ -59,7 +70,15 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress, true);
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentDidUpdate() {
+    if (this.state.buttonOnOrOff) {
+      document.addEventListener('keydown', this.handleKeyPress);
+    } else {
+      document.removeEventListener('keydown', this.handleKeyPress);
+    }
   }
 
   handleKeyPress(e) {
@@ -86,8 +105,13 @@ class AppContainer extends React.Component {
   }
 
   render() {
-    const { instrumentType, buttonClicked, soundVolume, urlToPlay } =
-      this.state;
+    const {
+      instrumentType,
+      buttonClicked,
+      soundVolume,
+      urlToPlay,
+      buttonOnOrOff,
+    } = this.state;
 
     return (
       <div className="component-container">
@@ -99,6 +123,8 @@ class AppContainer extends React.Component {
           urlToPlay={urlToPlay}
           onChangeVolume={this.onChangeVolume}
           soundVolume={soundVolume}
+          powerButton={this.powerButton}
+          buttonOnOrOff={buttonOnOrOff}
         />
       </div>
     );

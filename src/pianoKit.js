@@ -1,6 +1,7 @@
 import instrumentsData from './utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFreeCodeCamp } from '@fortawesome/free-brands-svg-icons';
+import React from 'react';
 
 const PianoMoodContainer = (props) => {
   const {
@@ -10,6 +11,8 @@ const PianoMoodContainer = (props) => {
     handleButtonClick,
     onChangeVolume,
     soundVolume,
+    powerButton,
+    buttonOnOrOff,
   } = props;
 
   function drawMusicalBoard() {
@@ -30,9 +33,13 @@ const PianoMoodContainer = (props) => {
 
   const item = drawMusicalBoard();
 
-  let title = '';
+  let stateInstrument = null;
+  let title = null;
   let nameSound = null;
-  if (instrumentType) {
+
+  if (!buttonOnOrOff) {
+    nameSound = null;
+  } else if (instrumentType) {
     title = 'Heater Kit';
     nameSound = urlToPlay.nameSoundBank;
   } else {
@@ -40,10 +47,19 @@ const PianoMoodContainer = (props) => {
     nameSound = urlToPlay.nameSoundPiano;
   }
 
+  if (buttonOnOrOff) {
+    stateInstrument = 'ON';
+  } else {
+    stateInstrument = 'OFF';
+  }
+
   return (
     <div className="elements-container">
       <div className="items-container">{item}</div>
       <div className="container-button-and-title">
+        <button className="buttonOnOrOff" onClick={powerButton}>
+          {stateInstrument}
+        </button>
         <div className="icon-container">
           FFC <FontAwesomeIcon icon={faFreeCodeCamp} />{' '}
         </div>
