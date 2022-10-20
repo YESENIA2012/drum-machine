@@ -1,6 +1,6 @@
-import React from 'react';
-import PianoMoodContainer from './pianoKit';
-import instrumentsData from './utils';
+import React from "react";
+import PianoMoodContainer from "./pianoKit";
+import instrumentsData from "./utils";
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -8,15 +8,13 @@ class AppContainer extends React.Component {
     this.state = {
       instrumentType: true,
       soundVolume: 0.3,
-      urlToPlay: '',
+      urlToPlay: "",
       buttonOnOrOff: true,
     };
 
     this.handleInstrumentTypeClick = this.handleInstrumentTypeClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.playSound = this.playSound.bind(this);
     this.onChangeVolume = this.onChangeVolume.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.powerButton = this.powerButton.bind(this);
   }
 
@@ -70,14 +68,14 @@ class AppContainer extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
+    document.addEventListener("keydown", this.handleKeyPress);
   }
 
   componentDidUpdate() {
     if (this.state.buttonOnOrOff) {
-      document.addEventListener('keydown', this.handleKeyPress);
+      document.addEventListener("keydown", this.handleKeyPress);
     } else {
-      document.removeEventListener('keydown', this.handleKeyPress);
+      document.removeEventListener("keydown", this.handleKeyPress);
     }
   }
 
