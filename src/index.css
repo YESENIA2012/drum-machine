@@ -11,3 +11,116 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.component-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 755px;
+  background-color: #8d8d8d;
+}
+
+.elements-container{
+  display: flex;
+  flex-direction: row;
+  width: 680px;
+  height: 330px;
+  border: 5px solid orange;
+}
+
+.items-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px 30px 30px 30px;
+  width: 400px;
+  justify-content: center;
+  align-items: center;
+}
+
+.element{
+  width: 100px;
+  height: 80px;
+  margin: 10px 2px 2px 5px;
+  padding-top: 30px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: black 3px 3px 5px;
+}
+
+.element:hover{
+  cursor: pointer;
+}
+
+.container-button-and-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 45px;
+}
+
+.sound-title{
+  width: 200px;
+  margin: 15px auto;
+  padding: 15px;
+}
+
+.element, .sound-title{
+  background-color: gray;
+  text-align: center;
+}
+
+.element, .mood-title, .sound-title, .button{
+  color: black;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.icon-container{
+  position:absolute;
+  margin-top: -290px;
+  margin-left: 230px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.buttonOnOrOff{
+  margin-bottom: 15px;
+}
+
+.button, .buttonOnOrOff{
+  height: 30px;
+  background-color: gray;
+  border: 2px solid orange;
+}
+
+.buttonOnOrOff:hover{
+  cursor: pointer;
+}
+
+.button:hover{
+  cursor: pointer;
+}
+
+.volume-slider{
+  margin: 10px 0 30px 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding: 10px 0 20px 0;
+  margin-top: -12px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: black;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
